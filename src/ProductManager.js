@@ -94,7 +94,9 @@ class ProductManager {
             if (!product) {
                 throw new Error(`No product matches id ${id}.`)
             }
-            const indexOfProduct = products.indexOf(product)
+            const indexOfProduct = products.findIndex(
+                (element) => element.id === id
+            )
             // actualiza solamente los campos que se enviaron en el argumento updatedProduct, si no se provee, usa el valor original del producto
             for (const [key, value] of Object.entries(product)) {
                 product[key] = updatedProduct[key] || value
@@ -118,7 +120,9 @@ class ProductManager {
             if (!product) {
                 throw new Error(`No product matches id ${id}.`)
             }
-            const indexOfProduct = products.indexOf(product)
+            const indexOfProduct = products.findIndex(
+                (element) => element.id === id
+            )
             products.splice(indexOfProduct, 1)
             fs.promises.writeFile(this.path, JSON.stringify(products))
             return `Product successfully deleted: ${product}`
@@ -137,8 +141,16 @@ await testProduct.addProduct({
     code: 'SAN123',
     stock: 20
 })
+await testProduct.addProduct({
+    title: 'The way of kings',
+    description: 'libro',
+    price: 499,
+    thumbnail: 'no',
+    code: 'SAN456',
+    stock: 30
+})
 console.log(await testProduct.getProducts())
 await testProduct.updateProduct(1, { title: 'Mistborn, The Final Empire' })
-console.log(await testProduct.getProductById(1))
+console.log(await testProduct.getProducts())
 await testProduct.deleteProduct(1)
 console.log(await testProduct.getProducts())

@@ -1,1 +1,1 @@
-[]
+[{"title":"The way of kings","description":"libro","price":499,"thumbnail":"no","code":"SAN456","stock":30,"id":2},{"title":"The wheel of time","description":"libro","price":599,"thumbnail":"no","code":"ROB222","stock":30,"id":3}]
